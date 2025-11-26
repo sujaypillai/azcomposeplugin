@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Azure provider wrapper for Docker Compose
+# This script is called when provider type is "azure"
+
+# Forward all arguments directly to docker-azure
+exec docker-azure "$@"

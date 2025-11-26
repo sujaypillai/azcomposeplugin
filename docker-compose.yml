@@ -1,0 +1,42 @@
+services:
+  # Provider service for Azure PostgreSQL
+  postgres:
+    provider:
+      type: azure
+      options:
+        resource: postgres
+        server_name: demo300ae5
+        database_name: myappdb
+        location: southeastasia
+        sku: Standard_B1ms
+        storage_mb: 32768
+        backup_retention_days: 7
+
+  # Application service that depends on the PostgreSQL provider
+  web:
+    image: node:20-slim
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    depends_on:
+      - postgres
+    ports:
+      - "4000:3000"
+    command: sh -c "npm install && npm start"
+    # Environment variables will be automatically injected:
+    # POSTGRES_HOST - Azure PostgreSQL server hostname
+    # POSTGRES_PORT - Database port
+    # POSTGRES_DATABASE - Database name
+    # POSTGRES_USER - Database username
+    # POSTGRES_PASSWORD - Database password
+    # POSTGRES_URL - Full connection string
+
+  # Another service using the same database
+  worker:
+    image: node:20-slim
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    depends_on:
+      - postgres
+    command: sh -c "npm install && npm run worker"

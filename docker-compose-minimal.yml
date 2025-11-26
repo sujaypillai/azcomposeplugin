@@ -1,0 +1,9 @@
+services:
+  database:
+    provider:
+      type: azure
+      options:
+        resource: postgres
+        server_name: demo8071fd2f
+        database_name: testdb
+        location: southeastasia

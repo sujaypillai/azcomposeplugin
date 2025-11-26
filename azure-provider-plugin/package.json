@@ -1,0 +1,33 @@
+{
+  "name": "docker-azure",
+  "version": "1.0.0",
+  "description": "Docker Compose provider plugin for Azure services (PostgreSQL, MySQL, etc.)",
+  "main": "index.js",
+  "bin": {
+    "docker-azure": "./index.js"
+  },
+  "scripts": {
+    "test": "node test/test.js",
+    "install-plugin": "chmod +x index.js && npm link"
+  },
+  "keywords": [
+    "docker",
+    "compose",
+    "provider",
+    "azure",
+    "postgresql",
+    "plugin"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@azure/arm-postgresql-flexible": "^8.0.0",
+    "@azure/identity": "^4.0.0",
+    "@azure/arm-resources": "^5.2.0",
+    "commander": "^11.1.0",
+    "dotenv": "^16.3.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
